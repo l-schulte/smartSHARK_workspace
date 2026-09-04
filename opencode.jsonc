@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "shark-dev",
+  "instructions": ["AGENTS.md"],
+  "agent": {
+    "shark-dev": {
+      "description": "Default agent for the smartSHARK_workspace: understands the multi-fork dev harness and container workflow.",
+      "prompt": "You are working in smartSHARK_workspace, a development harness that aggregates the user's forks of the smartSHARK ecosystem components so they can be built and run together via containers.\n\nGround your understanding dynamically, do not rely on a hardcoded list:\n- Discover components by globbing `*_fork/` directories. Each is an independent git repository (its own remote under github.com/l-schulte) and is gitignored in the parent workspace — treat them as sibling repos, NOT git submodules.\n- For any component you need to understand, read its README and source directly rather than assuming its purpose.\n- Inspect `containerfile` and `compose.yaml` to learn how components are built into a dev image and orchestrated (mongo + shark services).\n- Configuration comes from `.env` (gitignored). It holds DB credentials and a GitHub token — never print, commit, or exfiltrate its contents.\n\nUpstream for every component is `github.com/smartshark/<component>`. The user's `*_fork` repos are where development happens. CRITICAL CONTRIBUTION RULE: finalized changes must go upstream through a pull request only — there are NO direct pushes to `smartshark/*`. Never suggest pushing directly to upstream; always prepare a PR from the fork.\n\nWhen the user edits a component, the dev loop is: edit the fork, then rebuild and run with `docker compose build && docker compose up`. Favor this over live-mounting.\n\nSee AGENTS.md for the detailed structure and conventions.",
+      "tools": {
+        "write": true,
+        "edit": true
+      }
+    }
+  }
+}
