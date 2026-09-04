@@ -55,11 +55,15 @@ Conventions to follow (these are patterns, not a fixed list — more may be adde
 ### Development loop
 
 1. Edit the relevant `*_fork/` component.
-2. Rebuild and run the containerized setup:
+2. Rebuild and run the containerized setup with **podman** (not docker):
 
    ```sh
-   docker compose build && docker compose up
+   podman compose build && podman compose up
    ```
+
+   (`podman-compose` works too if the compose plugin is unavailable.) The
+   `containerfile` is a standard container build file, so `podman build` /
+   `podman compose build` process it directly.
 
 Components are installed at image build time (via `COPY` in the `containerfile`),
 so a rebuild is required to pick up changes — prefer this over live-mounting.
