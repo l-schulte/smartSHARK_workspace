@@ -1,0 +1,37 @@
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PW}
+    volumes:
+      - ./backup:/backup:Z
+
+  vcs-shark:
+    build: .
+    command: sh -c 'vcsshark -D mongo -U ${DB_USER} -P ${DB_PW} -DB ${DB_NAME} -H ${DB_HOST} -p ${DB_PORT} --project-name $$PROJECT --path /repos/$$PROJECT -a admin --cores-per-job 1'
+    environment:
+      PROJECT: metaphysics
+    volumes:
+      - ./repos:/repos:z
+
+  pr-shark:
+    build: .
+    command: sh -c 'python3 prSHARK/smartshark_plugin.py -D mongo -U ${DB_USER} -P ${DB_PW} -DB ${DB_NAME} -H ${DB_HOST} -p ${DB_PORT} --project-name $$PROJECT -i $$URL -b $$BACKEND -a admin --token ${GH_TOKEN}'
+    environment:
+      PROJECT: metaphysics
+      BACKEND: github
+      URL: https://github.com/artsy/metaphysics/pulls
+    volumes:
+      - ./repos:/repos:z
+
+  coverage-shark:
+    build: .
+    command: sh -c 'python3 coverageSHARK/smartshark_plugin.py -D mongo -U ${DB_USER} -P ${DB_PW} -DB ${DB_NAME} -H ${DB_HOST} -p ${DB_PORT} --project-name $$PROJECT -a admin'
+    environment:
+      PROJECT: metaphysics
+    volumes:
+      - ./coverage/metaphysics:/coverage:z

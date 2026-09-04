@@ -1,0 +1,9 @@
+.env
+
+/backup/*
+/coverage/*
+/repos/*
+
+# Component repos (managed independently)
+*_fork/
+coverageSHARK_lite/

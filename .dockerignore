@@ -1,0 +1,40 @@
+# Git
+**/.git
+
+# Python build artifacts
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.egg-info
+**/*.egg
+**/build/
+**/dist/
+
+# Virtual environments
+.venv/
+**/.venv
+**/venv/
+**/env/
+
+# Secrets and Docker config
+.env
+compose.yaml
+
+# CI/CD
+**/.github/
+
+# IDE / editor
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Misc caches
+**/.tox/
+**/.cache/
+**/.coverage
+**/.mypy_cache/
+**/.pytest_cache/
+**/htmlcov/
