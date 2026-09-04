@@ -7,6 +7,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PW}
+      GLIBC_TUNABLES: glibc.pthread.rseq=1
     volumes:
       - ./backup:/backup:Z
 
