@@ -25,7 +25,7 @@ services:
     environment:
       PROJECT: metaphysics
       BACKEND: github
-      URL: https://github.com/artsy/metaphysics/pulls
+      URL: https://api.github.com/repos/artsy/metaphysics/pulls
     volumes:
       - ./repos:/repos:z
 
