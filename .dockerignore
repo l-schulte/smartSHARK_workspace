@@ -38,3 +38,6 @@ compose.yaml
 **/.mypy_cache/
 **/.pytest_cache/
 **/htmlcov/
+
+# Reference clone for refactoringSHARK implementation
+RefactoringMiner/

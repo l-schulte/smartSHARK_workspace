@@ -3,7 +3,11 @@
 /backup/*
 /coverage/*
 /repos/*
+/data/*
 
 # Component repos (managed independently)
 *_fork/
 coverageSHARK_lite/
+
+# Reference clone for refactoringSHARK implementation
+/RefactoringMiner/
