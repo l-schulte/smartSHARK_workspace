@@ -17,8 +17,9 @@ RUN pip install fasttext-wheel setuptools pip pympler
 RUN pip install numpy>=1.22
 RUN pip install mongoengine==0.23.1
 RUN pip install pymongo==3.12.2
+RUN pip install mongomock==3.21.0
 
-RUN pip install --no-cache-dir fasttext-wheel setuptools pympler "numpy>=1.22"
+RUN pip install --no-cache-dir fasttext-wheel setuptools pympler "numpy>=1.22" tree-sitter tree-sitter-javascript tree-sitter-typescript
 
 ENV AM_I_IN_CONTAINER true
 
@@ -36,8 +37,8 @@ RUN cd /vcsSHARK && python3 setup.py install
 COPY prSHARK_fork /prSHARK
 RUN cd /prSHARK && python3 setup.py install
 
-COPY pycoSHARK_fork /pycoSHARK
-RUN pip install /pycoSHARK
-
 COPY refactoringSHARK_fork /refactoringSHARK
 RUN cd /refactoringSHARK && python3 setup.py install
+
+COPY pycoSHARK_fork /pycoSHARK
+RUN pip install /pycoSHARK

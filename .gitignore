@@ -3,6 +3,7 @@
 /backup/*
 /coverage/*
 /repos/*
+/tools/*
 
 # Component repos (managed independently)
 *_fork/
